@@ -1,16 +1,16 @@
 pro quit_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block,event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num,data_path
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.top,/destroy
-	data_dir='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/data/'
+	data_dir=data_path
 	save,state,filename=data_dir+event_num+'/'+event_num+'.sav'
 	print,'state has been saved'
 	ptr_free,state
 end
 pro clean_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
-	data_dir='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/data/'
+	data_dir=data_path
 	save,state,filename=data_dir+event_num+'/'+event_num+'.sav'
 		;help,*state
 	;print,(*state).energy_channel__soho
@@ -30,9 +30,9 @@ pro clean_event,event
 end
 pro soho_event,event
 	print,'now processing soho proton'
-	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
+	restore,'/Users/xuzigong/CodeSpace/Git/Determined_onset_time_of_SEP/IDL_version/common/constant_define.sav'
 	energy_name=['15.4MeV','18.9MeV','23.3meV','29.1MeV','36.4MeV','45.6MeV','57.4MeV','72.0MeV','90.5MeV','108.0MeV']	
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	set_plot,'x'
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.id,get_uvalue=eventvalue
@@ -80,7 +80,7 @@ pro wind_event,event
 	print,'now processing wind processing'
 	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
 	energy_name=['27.0KeV','40.1KeV','66.2KeV','108.4KeV','181.8KeV','309.5KeV','516.8KeV']
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	set_plot,'x'
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.id,get_uvalue=eventvalue
@@ -129,7 +129,7 @@ pro STAproton_event,event
 	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
 	energy_name=['1.8-3.6MeV','4.0-6.0MeV','6.0-10.0MeV','10.0-15.0MeV','13.6-15.1MeV','14.9-17.1MeV','17.0-19.3MeV','20.8-23.8MeV','23.8-26.4MeV','26.3-29.7MeV'$
 		,'29.5-33.4MeV','33.4-35.8MeV','35.5-40.5MeV','40.0-60.0MeV','60.0-100.0MeV']
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	set_plot,'x'
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.id,get_uvalue=eventvalue
@@ -192,7 +192,7 @@ pro STBproton_event,event
 	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
 	energy_name=['1.8-3.6MeV','4.0-6.0MeV','6.0-10.0MeV','10.0-15.0MeV','13.6-15.1MeV','14.9-17.1MeV','17.0-19.3MeV','20.8-23.8MeV','23.8-26.4MeV','26.3-29.7MeV'$
 		,'29.5-33.4MeV','33.4-35.8MeV','35.5-40.5MeV','40.0-60.0MeV','60.0-100.0MeV']
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	set_plot,'x'
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.id,get_uvalue=eventvalue
@@ -250,7 +250,7 @@ pro STBproton_event,event
 end
 pro STAelectron_event,event
 	print,'now processing STEREO A electron'
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
 	energy_name=['45.0-55.0KeV','55.0-65.0KeV','65.0-75.0KeV','75.0-85.0KeV','85.0-105.KeV','105.0-125.KeV','125.0-145.KeV','145.0-165.KeV','165.0-195.KeV',$
 	'195.0-225.KeV','225.0-255.KeV','255.0-295.KeV','295.0-335.KeV','335.0-375.KeV','375.0-425.KeV']
@@ -302,8 +302,8 @@ end
 
 pro STBelectron_event, event
 	print,'now processing STEREO B electron'
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
-	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
+	common Version_block
+	restore,'/Users/xuzigong/CodeSpace/Git/Determined_onset_time_of_SEP/IDL_version/common/constant_define.sav'
 	energy_name=['45.0-55.0KeV','55.0-65.0KeV','65.0-75.0KeV','75.0-85.0KeV','85.0-105.KeV','105.0-125.KeV','125.0-145.KeV','145.0-165.KeV','165.0-195.KeV',$
 	'195.0-225.KeV','225.0-255.KeV','255.0-295.KeV','295.0-335.KeV','335.0-375.KeV','375.0-425.KeV']
 	set_plot,'x'
@@ -349,7 +349,7 @@ pro STBelectron_event, event
 end
 
 pro Version_1_event, event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 	widget_control,event.top,GET_uvalue = state
 ;	print,event.ID
 
@@ -638,7 +638,7 @@ pro Energy_channel_event_STB_electron,event
 	;print,(*state).energy_channel_soho
 end
 pro save_soho_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=soho_save_dir
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num) then begin
@@ -654,7 +654,7 @@ pro save_soho_event,event
 	set_plot,window_name
 end
 pro save_wind_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=wind_save_dir
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num) then begin
@@ -670,7 +670,7 @@ pro save_wind_event,event
 	set_plot,window_name
 end
 pro save_STAproton_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=STAproton_save_dir
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num) then begin
@@ -686,7 +686,7 @@ pro save_STAproton_event,event
 	set_plot,window_name
 end
 pro save_STAelectron_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=STAelectron_save_dir
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num) then begin
@@ -702,7 +702,7 @@ pro save_STAelectron_event,event
 	set_plot,window_name
 end
 pro save_STBproton_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=STBproton_save_dir
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num) then begin
@@ -718,7 +718,7 @@ pro save_STBproton_event,event
 	set_plot,window_name
 end
 pro save_STBelectron_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=STBelectron_save_dir
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num) then begin
@@ -737,7 +737,7 @@ end
 pro save_result_event,event
 	;used for all result save button
 	restore,'/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/code/common/constant_define.sav'
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.id,get_uvalue=eventvalue
 	if not file_exist('/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num) then begin
@@ -750,7 +750,7 @@ pro save_result_event,event
 							velocity=calculate_velocity(P_soho_high,unit='MeV',particle='proton',light_speed=light_speed)
 							IMF=length_of_IMF(solar_wind_speed,l_au=len)
 							openw,lun,name,/get_lun
-							printf,lun,'SOHO result from TSA and VDA(date: '+event_num+');Updata in '+systim()
+							printf,lun,'SOHO result from TSA and VDA(date: '+event_num+');Updata in '+systime()
   							printf,lun,'Energy(MeV)','Onset_time','travel time(solar speed)','Release time(+8.3 min)','quality',format='(4A-25,A-20)'
 
   							for i=0,N_elements((*state).energy_channel_soho)-1 do begin 
@@ -769,7 +769,7 @@ pro save_result_event,event
 							velocity=calculate_velocity(wind_energy,unit='KeV',particle='electron',light_speed=light_speed)
 							IMF=length_of_IMF(solar_wind_speed,l_au=len)
 							openw,lun,name,/get_lun
-							printf,lun,'wind electron result from TSA and VDA(date: '+event_num+');Updata in '+systim()
+							printf,lun,'wind electron result from TSA and VDA(date: '+event_num+');Updata in '+systime()
   							printf,lun,'Energy(keV)','Onset_time','travel time(solar speed)','Release time(+8.3 min)','quality',format='(4A-25,A-20)'
 
   							for i=0,N_elements((*state).energy_channel_wind)-1 do begin 
@@ -784,10 +784,10 @@ pro save_result_event,event
   						end
   	"save_STAproton_result":begin
    							name = dialog_pickfile(/write,file='result_STAproton.dat',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num)
-							velocity=calculate_velocity(STEREO_proton,unit='MeV',particle='proton',light_speed=light_speed)
-							IMF=length_of_IMF(solar_wind_speed,l_au=len)
-							openw,lun,name,/get_lun
-							printf,lun,'STEREO A proton result from TSA and VDA(date: '+event_num+');Updata in '+systim()
+							  velocity=calculate_velocity(STEREO_proton,unit='MeV',particle='proton',light_speed=light_speed)
+							  IMF=length_of_IMF(solar_wind_speed,l_au=len)
+							  openw,lun,name,/get_lun
+							  printf,lun,'STEREO A proton result from TSA and VDA(date: '+event_num+');Updata in '+systime()
   							printf,lun,'Energy(MeV)','Onset_time','travel time(solar speed)','Release time(+8.3 min)','quality',format='(4A-25,A-20)'
   							print,(*state).energy_channel_STA_proton
   							for i=0,N_elements((*state).energy_channel_STA_proton)-1 do begin 
@@ -803,10 +803,10 @@ pro save_result_event,event
   						end
   	"save_STBproton_result":begin
     						name = dialog_pickfile(/write,file='result_STBproton.dat',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num)
-							velocity=calculate_velocity(STEREO_proton,unit='MeV',particle='proton',light_speed=light_speed)
-							IMF=length_of_IMF(solar_wind_speed,l_au=len)
-							openw,lun,name,/get_lun
-							printf,lun,'STEREO B proton result from TSA and VDA(date: '+event_num+');Updata in '+systim()
+							  velocity=calculate_velocity(STEREO_proton,unit='MeV',particle='proton',light_speed=light_speed)
+							  IMF=length_of_IMF(solar_wind_speed,l_au=len)
+							  openw,lun,name,/get_lun
+							  printf,lun,'STEREO B proton result from TSA and VDA(date: '+event_num+');Updata in '+systime()
   							printf,lun,'Energy(MeV)','Onset_time','travel time(solar speed)','Release time(+8.3 min)','quality',format='(4A-25,A-20)'
   							print,(*state).energy_channel_STB_proton
   							for i=0,N_elements((*state).energy_channel_STB_proton)-1 do begin 
@@ -822,11 +822,11 @@ pro save_result_event,event
 
   						end
   	"save_STAelectron_result":begin
-  	   						name = dialog_pickfile(/write,file='result_STAelectron.dat',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num)
-							velocity=calculate_velocity(STEREO_electron,unit='KeV',particle='electron',light_speed=light_speed)
-							IMF=length_of_IMF(solar_wind_speed,l_au=len)
-							openw,lun,name,/get_lun
-							printf,lun,'STEREO A electron result from TSA and VDA(date: '+event_num+');Updata in '+systim()
+  	             name = dialog_pickfile(/write,file='result_STAelectron.dat',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num)
+                velocity=calculate_velocity(STEREO_electron,unit='KeV',particle='electron',light_speed=light_speed)
+                IMF=length_of_IMF(solar_wind_speed,l_au=len)
+                openw,lun,name,/get_lun
+                printf,lun,'STEREO A electron result from TSA and VDA(date: '+event_num+');Updata in '+systime()
   							printf,lun,'Energy(KeV)','Onset_time','travel time(solar speed)','Release time(+8.3 min)','quality',format='(4A-25,A-20)'
   							print,(*state).energy_channel_STA_electron
   							for i=0,N_elements((*state).energy_channel_STA_electron)-1 do begin 
@@ -846,11 +846,11 @@ pro save_result_event,event
 
   						end
   	"save_STBelectron_result":begin
-  	   						name = dialog_pickfile(/write,file='result_STBelectron.dat',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num)
-							velocity=calculate_velocity(STEREO_electron,unit='KeV',particle='electron',light_speed=light_speed)
-							IMF=length_of_IMF(solar_wind_speed,l_au=len)
-							openw,lun,name,/get_lun
-							printf,lun,'STEREO B electron result from TSA and VDA(date: '+event_num+');Updata in '+systim()
+  	   				  name = dialog_pickfile(/write,file='result_STBelectron.dat',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/result/'+event_num)
+                velocity=calculate_velocity(STEREO_electron,unit='KeV',particle='electron',light_speed=light_speed)
+                IMF=length_of_IMF(solar_wind_speed,l_au=len)
+                openw,lun,name,/get_lun
+							  printf,lun,'STEREO B electron result from TSA and VDA(date: '+event_num+');Updata in '+systime()
   							printf,lun,'Energy(KeV)','Onset_time','travel time(solar speed)','Release time(+8.3 min)','quality',format='(4A-25,A-20)'
   							print,(*state).energy_channel_STB_electron
   							for i=0,N_elements((*state).energy_channel_STB_electron)-1 do begin 
@@ -867,7 +867,7 @@ pro save_result_event,event
 end
 
 pro background_soho_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=event_state
@@ -889,7 +889,7 @@ pro background_soho_event,event
 			end;
 end
 pro background_wind_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=event_state
@@ -911,7 +911,7 @@ pro background_wind_event,event
 			end;
 end
 pro background_STAproton_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=event_state
@@ -933,7 +933,7 @@ pro background_STAproton_event,event
 			end;
 end
 pro background_STAelectron_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=event_state
@@ -956,7 +956,7 @@ pro background_STAelectron_event,event
 end
 
 pro background_STBproton_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=event_state
@@ -978,7 +978,7 @@ pro background_STBproton_event,event
 			end;
 end
 pro background_STBelectron_event,event
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,data_path
 	widget_control,event.top,get_uvalue=state
 	widget_control,event.ID,get_uvalue=event_state
 	if event_state eq 'background start time' then begin
@@ -1008,6 +1008,7 @@ end
 pro save_allimage_event,event
 	widget_control,event.top,get_uvalue=state
 	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	
 	set_plot,'ps'
 	filename = dialog_pickfile(/write,file=event_num+'.eps',path='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/image/'+event_num)
 	device,filename=filename,/portrait,yoffset=2,/inch,xsize=7,ysize=7
@@ -1035,8 +1036,9 @@ Pro Version_1
 	;Modification history: 
 	;2017.9.21 xuzigong
 	;2018.06.12; change the size of window to fit a small screen
-	data_dir='/Users/zigongxu/Documents/work/myWork2_GCS_releasetime/data/'
-	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num
+	common Version_block, event_num,Eruption_time,Start_day,end_day,back_start_time,back_end_time,solar_wind_speed,smooth_num,data_path
+	data_path='./data/'
+  data_dir=data_path
 	smooth_num = '0'
 	solar_wind_speed ='400000'
 	wxy=get_screen_size()
